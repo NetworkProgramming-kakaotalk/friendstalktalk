@@ -64,14 +64,6 @@ public class ChatWindow extends JFrame {
 	private Frame frame;
 	private FileDialog fd;
 	private JButton imgBtn;
-
-	JPanel panel;
-	private JLabel lblMouseEvent;
-	private Graphics gc;
-	private int pen_size = 2; // minimum 2
-	// 그려진 Image를 보관하는 용도, paint() 함수에서 이용한다.
-	private Image panelImage = null; 
-	private Graphics gc2 = null;
 	public ChatWindow view;
 
 	
@@ -132,9 +124,9 @@ public class ChatWindow extends JFrame {
 		panel.add(lblUserName);
 		setVisible(true);
 
-		//AppendText("User " + username + " connecting " + ip_addr + " " + port_no);
-		//UserName = username;
-		//lblUserName.setText(username);
+		AppendText("User " + username + " connecting " + ip_addr + " " + port_no);
+		UserName = username;
+		lblUserName.setText(username);
 
 		ImageIcon clip_icon = new ImageIcon("src/clip.png");
 		imgBtn = new JButton(clip_icon);
@@ -227,7 +219,10 @@ public class ChatWindow extends JFrame {
 							AppendText("[" + cm.UserName + "]");
 						AppendImage(cm.img);
 						break;
-					case "500": // Mouse Event 수신
+					case "500": //친구 리스트
+						
+						
+						break;
 					}
 				} catch (IOException e) {
 					AppendText("ois.readObject() error");
@@ -247,6 +242,8 @@ public class ChatWindow extends JFrame {
 			}
 		}
 	}
+	
+	
 
 	// keyboard enter key 치면 서버로 전송
 	class TextSendAction implements ActionListener {
@@ -300,7 +297,7 @@ public class ChatWindow extends JFrame {
 	// 화면에 출력
 	public void AppendText(String msg) {
 		// textArea.append(msg + "\n");
-		AppendIcon(icon1);
+		//AppendIcon(icon1);
 		msg = msg.trim(); // 앞뒤 blank와 \n을 제거한다.
 		int len = textArea.getDocument().getLength();
 		// 끝으로 이동
@@ -330,7 +327,7 @@ public class ChatWindow extends JFrame {
 		SimpleAttributeSet right = new SimpleAttributeSet();
 		StyleConstants.setAlignment(right, StyleConstants.ALIGN_RIGHT);
 		StyleConstants.setForeground(right, Color.BLUE);
-		AppendIcon(bugi);
+		//AppendIcon(bugi);
 	    doc.setParagraphAttributes(doc.getLength(), 1, right, false);
 		try {
 			doc.insertString(doc.getLength(),msg+"\n", right );

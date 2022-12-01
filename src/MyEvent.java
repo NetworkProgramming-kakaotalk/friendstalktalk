@@ -23,8 +23,9 @@ public class MyEvent extends JFrame implements ActionListener{
    private ShowList showlist1;
    private JTextField textField;
    private JTextPane listArea;
+   private FriendsList friendslist;
    
-   public MyEvent(String username) {
+   public MyEvent(String username,String ip_addr,String port_no) {
       setTitle("친구 톡톡");
       setBounds(100,100,340,560);
       
@@ -56,6 +57,10 @@ public class MyEvent extends JFrame implements ActionListener{
       	showlist1 = new ShowList(username);
       	showlist1.setBackground(Color.WHITE);
       	showlist1.setBounds(10, y, 210, 49);
+      	
+      	friendslist = new FriendsList(username, ip_addr, port_no);
+      	friendslist.setBackground(Color.WHITE);
+      	friendslist.setBounds(10, y, 210, 49);
       
 //          showlist2 = new ShowList(username);
 //          showlist2.setBackground(Color.WHITE);
@@ -64,25 +69,19 @@ public class MyEvent extends JFrame implements ActionListener{
 //          showlist3 = new ShowList(username);
 //          showlist3.setBackground(Color.WHITE);
 //          showlist3.setBounds(10, 170, 210, 49);
-
-      
-      
+      	
       JPanel panel = new JPanel();
       panel.setBounds(104,10,220,120);
       panel.setBackground(Color.WHITE);
       panel.setLayout(null);
+    
       
-      JScrollPane scrollPane = new JScrollPane();
-      scrollPane.setBounds(104, 130, 220, 390);
-      scrollPane.setBorder(null);
-      p.add(scrollPane);
-      
-      listArea = new JTextPane();
-      listArea.setEditable(true);
-      listArea.setFont(new Font("굴림체", Font.PLAIN, 14));
-      scrollPane.setViewportView(listArea);
-      listArea.setBackground(Color.WHITE);
-      listArea.setBorder(null);
+      //listArea = new JTextPane();
+      //listArea.setEditable(true);
+      //listArea.setFont(new Font("굴림체", Font.PLAIN, 14));
+      //scrollPane.setViewportView(listArea);
+      //listArea.setBackground(Color.WHITE);
+      //listArea.setBorder(null);
       
       textField = new JTextField();
       textField.setBounds(0, 0, 80, 40);
@@ -97,6 +96,19 @@ public class MyEvent extends JFrame implements ActionListener{
       showlist1.setLayout(null);
       p.add(panel);
       
+      JScrollPane scrollPane = new JScrollPane();
+      scrollPane.setBounds(104, 130, 220, 390);
+      scrollPane.setBorder(null);
+      p.add(scrollPane);
+      	
+      JPanel listPanel = new JPanel();
+      scrollPane.setViewportView(listPanel);
+      //listPanel.setBounds(104,10,220,120);
+      listPanel.setBackground(Color.WHITE);
+      listPanel.setLayout(null);
+      listPanel.setBorder(null);
+      listPanel.add(friendslist);
+      
       setVisible(true);
       
    }
@@ -109,6 +121,7 @@ public class MyEvent extends JFrame implements ActionListener{
     	  textField.setFont(new Font("맑은 고딕", Font.BOLD, 20));
     	  textField.setEditable(false);
     	  showlist1.setVisible(true);
+    	  friendslist.setVisible(true);
 
       }else if(e.getSource()==b2) {
     	  textField.setText("대화창");
@@ -116,6 +129,7 @@ public class MyEvent extends JFrame implements ActionListener{
     	  textField.setFont(new Font("맑은 고딕", Font.BOLD, 20));
     	  textField.setEditable(false);
     	  showlist1.setVisible(false);
+    	  friendslist.setVisible(false);
       }
    }
 }

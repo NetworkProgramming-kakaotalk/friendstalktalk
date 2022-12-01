@@ -114,9 +114,9 @@ public class LogIn extends JFrame {
 			String username = txtUserName.getText().trim();
 			String ip_addr = txtIpAddress.getText().trim();
 			String port_no = txtPortNumber.getText().trim();
-			ChatWindow view = new ChatWindow(username, ip_addr, port_no);
+			//ChatWindow view = new ChatWindow(username, ip_addr, port_no);
 			setVisible(false);
-			//MyEvent view = new MyEvent(username);
+			MyEvent view = new MyEvent(username, ip_addr, port_no);
 		}
 	}
 }
