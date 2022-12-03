@@ -130,6 +130,8 @@ public class ChatWindow extends JFrame {
 				emoWind.setBounds(100,100,460,300);
 				view.setVisible(false);
 				emoWind.setVisible(true);
+				ChatMsg msg = new ChatMsg(UserName, "400", "Bye");
+				SendObject(msg);
 			}
 		});
 		
@@ -140,18 +142,32 @@ public class ChatWindow extends JFrame {
 		imgBtn.setBackground(White);
 		imgBtn.setBorder(null);
 
-		JButton btnExit = new JButton("종료");
+		ImageIcon out_icon = new ImageIcon("src/logout.png");
+		JButton btnExit = new JButton(out_icon);
 		btnExit.setFont(new Font("굴림", Font.PLAIN, 12));
 		btnExit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ChatMsg msg = new ChatMsg(UserName, "400", "Bye");
-				SendObject(msg);
+				//ChatMsg msg = new ChatMsg(UserName, "400", "Bye");
+				//SendObject(msg);
 				System.exit(0);
 			}
 		});
-		btnExit.setBounds(311, 15, 59, 30);
+		btnExit.setBounds(330, 10, 40, 40);
 		btnExit.setBackground(Gray);
 		panel.add(btnExit);
+		
+		ImageIcon list_icon = new ImageIcon("src/list.png");
+		JButton listBtn = new JButton(list_icon);
+		listBtn.setFont(new Font("굴림", Font.PLAIN, 12));
+		listBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ChatMsg msg = new ChatMsg(UserName, "200", "/list");
+				SendObject(msg);
+			}
+		});
+		listBtn.setBounds(279, 10, 40, 40);
+		listBtn.setBackground(Gray);
+		panel.add(listBtn);
 
 		view = this;
 
@@ -217,9 +233,9 @@ public class ChatWindow extends JFrame {
 							AppendText(msg);
 						break;
 					case "300": // Image 첨부
-						if (cm.UserName.equals(UserName))
+						if (cm.UserName.equals(UserName)) 
 							AppendTextR("[" + cm.UserName + "]");
-						else
+						else 
 							AppendText("[" + cm.UserName + "]");
 						AppendImage(cm.img);
 						break;
@@ -367,11 +383,11 @@ public class ChatWindow extends JFrame {
 		if (width > 200 || height > 200) {
 			if (width > height) { // 가로 사진
 				ratio = (double) height / width;
-				width = 200;
+				width = 80;
 				height = (int) (width * ratio);
 			} else { // 세로 사진
 				ratio = (double) width / height;
-				height = 200;
+				height = 80;
 				width = (int) (height * ratio);
 			}
 			new_img = ori_img.getScaledInstance(width, height, Image.SCALE_SMOOTH);
@@ -383,6 +399,7 @@ public class ChatWindow extends JFrame {
 		}
 		len = textArea.getDocument().getLength();
 		textArea.setCaretPosition(len);
+		textArea.replaceSelection("\n");
 		
 	}
 
