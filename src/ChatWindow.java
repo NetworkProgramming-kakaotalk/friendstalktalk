@@ -1,4 +1,3 @@
-package ChattingProgram;
 
 // JavaObjClientView.java ObjecStram 기반 Client
 import java.awt.FileDialog;
@@ -56,7 +55,9 @@ public class ChatWindow extends JFrame {
 	 * Create the frame.
 	 * @throws BadLocationException 
 	 */
+	
 	public ChatWindow(String username, String ip_addr, String port_no)  {
+		//emoWind.setBounds(100,100,460,300);
 		Color Dark_blue= new Color(0xBACEE0);
 		Color White= new Color(0xFFFFFF);
 		Color Gray= new Color(0xECECED);
@@ -127,6 +128,8 @@ public class ChatWindow extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				EmoticonWindow emoWind = new EmoticonWindow(username, ip_addr, port_no);
 				emoWind.setBounds(100,100,460,300);
+				view.setVisible(false);
+				emoWind.setVisible(true);
 			}
 		});
 		
@@ -151,8 +154,6 @@ public class ChatWindow extends JFrame {
 		panel.add(btnExit);
 
 		view = this;
-		
-		
 
 		try {
 			socket = new Socket(ip_addr, Integer.parseInt(port_no));
@@ -172,6 +173,8 @@ public class ChatWindow extends JFrame {
 			txtInput.requestFocus();
 			ImageSendAction action2 = new ImageSendAction();
 			imgBtn.addActionListener(action2);
+			//EmoticonSendAction action3 = new EmoticonSendAction();
+			//emoBtn.addActionListener(action3);
 			
 
 
@@ -180,7 +183,7 @@ public class ChatWindow extends JFrame {
 			e.printStackTrace();
 			AppendText("connect error");
 		}
-
+		setVisible(true);
 	}
 
 	// Server Message를 수신해서 화면에 표시
@@ -243,7 +246,6 @@ public class ChatWindow extends JFrame {
 			}
 		}
 	}
-	
 	
 
 	// keyboard enter key 치면 서버로 전송

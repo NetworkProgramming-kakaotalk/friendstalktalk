@@ -1,4 +1,4 @@
-package ChattingProgram;
+
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -16,7 +16,7 @@ public class MyEvent extends JFrame implements ActionListener{
    JPanel p;
    private ShowList showlist1;
    private JTextField textField;
-   public ChatWindow view;
+   public EmoticonWindow view;
    
    public MyEvent(String username, String ip_addr, String port_no) {
       setTitle("친구 톡톡");
@@ -47,8 +47,9 @@ public class MyEvent extends JFrame implements ActionListener{
       public void actionPerformed(ActionEvent e) {
          if(b2.getText().equals("대화")) {
                
-         view= new ChatWindow(username, ip_addr, port_no);
-         view.setBounds(400, 100, 392, 634);
+         view= new EmoticonWindow(username, ip_addr, port_no);
+         view.setBounds(100,100,460,300);
+         //view.setBounds(400, 100, 392, 634);
          //setBounds(100, 100, 392, 634);
          b2.setText("화면닫기");
 

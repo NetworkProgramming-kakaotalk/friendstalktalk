@@ -1,4 +1,4 @@
-package ChattingProgram;
+
 import java.awt.*;
 import java.text.SimpleDateFormat;
 
@@ -6,7 +6,7 @@ import javax.swing.*;
 import java.util.Date;
 
 public class ShowList extends JPanel {
-   private LogIn LogIn = new LogIn();
+  //private LogIn LogIn = new LogIn();
    private JTextField txtHello;
    private JTextField txtTime;
    public ImageIcon icon2 = new ImageIcon("src/Profile2.png");

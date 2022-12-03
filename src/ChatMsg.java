@@ -1,4 +1,4 @@
-package ChattingProgram;
+
 // ChatMsg.java 채팅 메시지 ObjectStream 용.
 import java.awt.event.MouseEvent;
 import java.io.Serializable;
