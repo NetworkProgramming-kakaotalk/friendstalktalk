@@ -1,24 +1,12 @@
+package ChattingProgram;
 
 // JavaObjClientView.java ObjecStram 기반 Client
-//실질적인 채팅 창
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
 import java.awt.FileDialog;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.awt.event.MouseMotionListener;
-import java.awt.event.MouseWheelEvent;
-import java.awt.event.MouseWheelListener;
-import java.awt.image.ImageObserver;
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.Socket;
 
@@ -34,10 +22,8 @@ import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import java.awt.Font;
 import java.awt.Frame;
-import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Color;
-import javax.swing.border.LineBorder;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
@@ -63,10 +49,9 @@ public class ChatWindow extends JFrame {
 
 	private Frame frame;
 	private FileDialog fd;
+	private JButton emoBtn;
 	private JButton imgBtn;
 	public ChatWindow view;
-
-	
 	/**
 	 * Create the frame.
 	 * @throws BadLocationException 
@@ -90,6 +75,10 @@ public class ChatWindow extends JFrame {
 	    panel.setBackground(Dark_blue);
 	    panel.setLayout(null);
 	    contentPane.add(panel);
+	    
+	    JLabel iconLabel = new JLabel(icon1);
+	    iconLabel.setBounds(10, 10, 30, 30);
+	    panel.add(iconLabel);
 		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(0, 60, 382, 400);
@@ -120,18 +109,30 @@ public class ChatWindow extends JFrame {
 		lblUserName.setBackground(Color.WHITE);
 		lblUserName.setFont(new Font("굴림", Font.BOLD, 14));
 		lblUserName.setHorizontalAlignment(SwingConstants.CENTER);
-		lblUserName.setBounds(66, 10, 62, 40);
+		lblUserName.setBounds(50, 10, 62, 40);
 		panel.add(lblUserName);
 		setVisible(true);
 
 		AppendText("User " + username + " connecting " + ip_addr + " " + port_no);
 		UserName = username;
 		lblUserName.setText(username);
-
+		
+		ImageIcon emo_icon = new ImageIcon("src/emoticon.png");
+		emoBtn = new JButton(emo_icon);
+		emoBtn.setBounds(10, 559, 30, 30);
+		contentPane.add(emoBtn);
+		emoBtn.setBackground(White);
+		emoBtn.setBorder(null);
+		emoBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				EmoticonWindow emoWind = new EmoticonWindow(username, ip_addr, port_no);
+				emoWind.setBounds(100,100,460,300);
+			}
+		});
+		
 		ImageIcon clip_icon = new ImageIcon("src/clip.png");
 		imgBtn = new JButton(clip_icon);
-		imgBtn.setFont(new Font("굴림", Font.PLAIN, 16));
-		imgBtn.setBounds(10, 549, 50, 40);
+		imgBtn.setBounds(50, 559, 30, 30);
 		contentPane.add(imgBtn);
 		imgBtn.setBackground(White);
 		imgBtn.setBorder(null);
@@ -171,6 +172,7 @@ public class ChatWindow extends JFrame {
 			txtInput.requestFocus();
 			ImageSendAction action2 = new ImageSendAction();
 			imgBtn.addActionListener(action2);
+			
 
 
 		} catch (NumberFormatException | IOException e) {
@@ -180,7 +182,6 @@ public class ChatWindow extends JFrame {
 		}
 
 	}
-
 
 	// Server Message를 수신해서 화면에 표시
 	class ListenNetwork extends Thread {
@@ -283,10 +284,19 @@ public class ChatWindow extends JFrame {
 			}
 		}
 	}
+	
 
-	ImageIcon icon1 = new ImageIcon("src/icon1.jpg");
-	ImageIcon bugi = new ImageIcon("src/bugi.jpg");
+	public void EmoticonViewAction(String emo_image) {
+		// TODO Auto-generated method stub
+		ChatMsg obcm = new ChatMsg(UserName, "300", "IMG");
+		ImageIcon img = new ImageIcon(emo_image);
+		obcm.img = img;
+		SendObject(obcm);
+	}
+	
 
+	ImageIcon icon1 = new ImageIcon("src/Profile.png");
+	
 	public void AppendIcon(ImageIcon icon) {
 		int len = textArea.getDocument().getLength();
 		// 끝으로 이동
@@ -297,7 +307,7 @@ public class ChatWindow extends JFrame {
 	// 화면에 출력
 	public void AppendText(String msg) {
 		// textArea.append(msg + "\n");
-		//AppendIcon(icon1);
+		AppendIcon(icon1);
 		msg = msg.trim(); // 앞뒤 blank와 \n을 제거한다.
 		int len = textArea.getDocument().getLength();
 		// 끝으로 이동
@@ -322,12 +332,12 @@ public class ChatWindow extends JFrame {
 	}
 	// 화면 우측에 출력
 	public void AppendTextR(String msg) {
+		AppendIcon(icon1);
 		msg = msg.trim(); // 앞뒤 blank와 \n을 제거한다.	
 		StyledDocument doc = textArea.getStyledDocument();
 		SimpleAttributeSet right = new SimpleAttributeSet();
 		StyleConstants.setAlignment(right, StyleConstants.ALIGN_RIGHT);
 		StyleConstants.setForeground(right, Color.BLUE);
-		//AppendIcon(bugi);
 	    doc.setParagraphAttributes(doc.getLength(), 1, right, false);
 		try {
 			doc.insertString(doc.getLength(),msg+"\n", right );

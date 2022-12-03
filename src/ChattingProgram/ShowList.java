@@ -1,3 +1,4 @@
+package ChattingProgram;
 import java.awt.*;
 import java.text.SimpleDateFormat;
 
@@ -5,10 +6,10 @@ import javax.swing.*;
 import java.util.Date;
 
 public class ShowList extends JPanel {
-   private LogIn javaGameClientMain = new LogIn();
+   private LogIn LogIn = new LogIn();
    private JTextField txtHello;
    private JTextField txtTime;
-   public ImageIcon icon1 = new ImageIcon("src/icon1.jpg");
+   public ImageIcon icon2 = new ImageIcon("src/Profile2.png");
    
    public ShowList(String username) {
       setLayout(null);
@@ -49,7 +50,7 @@ public class ShowList extends JPanel {
       textPane_1.setBounds(0, 125, 55, 25);
       add(textPane_1);
       
-      JLabel iconLabel = new JLabel(icon1);
+      JLabel iconLabel = new JLabel(icon2);
       iconLabel.setBounds(70, 10, 80, 70);
       add(iconLabel);
       

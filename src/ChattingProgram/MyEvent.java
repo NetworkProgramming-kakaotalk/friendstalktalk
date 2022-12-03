@@ -1,3 +1,4 @@
+package ChattingProgram;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -7,29 +8,21 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import java.awt.Rectangle;
-import java.awt.Window;
-
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
-import java.awt.FlowLayout;
-import java.awt.BorderLayout;
 
 public class MyEvent extends JFrame implements ActionListener{
    JButton b1,b2;
    JPanel p;
    private ShowList showlist1;
    private JTextField textField;
-   private JTextField txtUserName;
-   private JTextField txtIpAddress;
-   private JTextField txtPortNumber;
    public ChatWindow view;
    
    public MyEvent(String username, String ip_addr, String port_no) {
       setTitle("친구 톡톡");
       setBounds(100,100,340,560);
       
-    //사용자 버튼
+      //사용자 버튼
       Color Gray= new Color(0xECECED);
       p = new JPanel();
       ImageIcon user_icon = new ImageIcon("src/user.png");
@@ -87,7 +80,7 @@ public class MyEvent extends JFrame implements ActionListener{
       textField.setText("나의 프로필");
       textField.setEditable(false);
       textField.setHorizontalAlignment(SwingConstants.CENTER);
-     textField.setFont(new Font("맑은 고딕", Font.BOLD, 20));
+      textField.setFont(new Font("맑은 고딕", Font.BOLD, 20));
       panel.add(textField);
       textField.setColumns(10);
       panel.add(showlist1);
