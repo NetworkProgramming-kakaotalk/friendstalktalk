@@ -49,8 +49,6 @@ public class MyEvent extends JFrame implements ActionListener{
                
          view= new EmoticonWindow(username, ip_addr, port_no);
          view.setBounds(100,100,460,300);
-         //view.setBounds(400, 100, 392, 634);
-         //setBounds(100, 100, 392, 634);
          b2.setText("화면닫기");
 
          } else {
